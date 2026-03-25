@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'javac Hello World.java'
+                bat 'javac HelloWorld.java'
             }
         }
         stage('Run'){
