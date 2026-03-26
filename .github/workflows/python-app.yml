@@ -25,12 +25,10 @@ jobs:
         python-version: "3.11"
     - name: Install dependencies
       run: |
-    - name: Run Python file
-      run: |
-        python sample.py
+        python mathlib.py
         
-    #     python -m pip install --upgrade pip
-    #     pip install flake8 pytest
+  
+          pip install flake8 pytest
     #     if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     # - name: Lint with flake8
     #   run: |
