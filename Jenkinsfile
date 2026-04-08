@@ -2,14 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                bat 'javac HelloWorld.java'
+                sh 'docker build -t flask-docker-app .'
             }
         }
-        stage('Run'){
+        stage('Stop Old Container'){
             steps {
-                bat 'java HelloWorld'
+                sh 'docker rm -f flask-container || true'
+            }
+        }
+        stage('Run Container'){
+            steps {
+                sh 'docker run -d -p 5001:5000 --name flask-container flask-docker-app'
             }
         }
     }
