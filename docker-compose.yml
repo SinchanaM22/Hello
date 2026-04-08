@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sql_server_container
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=StrongPassword@123
+    ports:
+      - "1433:1433"
+    restart: always
+
+  flaskapp:
+    build: .
+    container_name: flask_employee_app
+    ports:
+      - "5001:5000"
+    environment:
+      - DB_SERVER=sqlserver
+      - DB_NAME=employee
+      - DB_USER=sa
+      - DB_PASS=StrongPassword@123
+    depends_on:
+      - sqlserver
+    restart: always
